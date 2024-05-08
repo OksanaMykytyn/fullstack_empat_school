@@ -9,6 +9,33 @@ use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
+    public function addToCart($id) {
+        $comic = Comic::findOrFail($id);
+        $cart = session()->get('cart', []);
+    
+        if (isset($cart[$comic])) {
+            return response()->json(['message' => 'Comics already exists in the cart'], 400);
+        }
+    
+    
+        $cart[$comic] = $comic;
+        session()->put('cart', $cart);
+    
+        return response()->json(['message' => 'Comics added to cart'], 200);
+    }
+
+    public function removeFromCart($id) {
+        $comic = Comic::findOrFail($id);
+        $cart = session()->get('cart', []);
+    
+        if (isset($cart[$comic])) {
+            unset($cart[$comic]);
+        session()->put('cart', $cart);
+    
+        return response()->json(['message' => 'Comics removed from cart'], 200);
+        }
+
+    }
     /**
      * Display a listing of the resource.
      */
