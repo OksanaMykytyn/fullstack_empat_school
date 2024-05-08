@@ -26,11 +26,11 @@ Route::prefix('/users')->group(function () {
     Route::get('/sweets', [SweetController::class, 'index']);
     Route::get('/sweets/{id}', [SweetController::class, 'show']);
 
-    Route::get('/add_to_cart/{id}', [ComicController::class, 'addToCart']);
-    Route::get('/add_to_cart/{id}', [SweetController::class, 'addToCart']);
-    Route::get('/add_to_cart/{id}', [WrapperController::class, 'addToCart']);
+    Route::get('/add_to_cart_comic/{id}', [ComicController::class, 'addToCart']);
+    Route::get('/add_to_cart_sweet/{id}', [SweetController::class, 'addToCart']);
+    Route::get('/add_to_cart_wrapper/{id}', [WrapperController::class, 'addToCart']);
 
-    Route::get('/remove_from_cart/{id}', [ComicController::class, 'removeFromCart']);
-    Route::get('/remove_from_cart/{id}', [SweetController::class, 'removeFromCart']);
-    Route::get('/remove_from_cart/{id}', [WrapperController::class, 'removeFromCart']);
+    Route::get('/remove_from_cart_comic/{id}', [ComicController::class, 'removeFromCart']);
+    Route::get('/remove_from_cart_sweet/{id}', [SweetController::class, 'removeFromCart']);
+    Route::get('/remove_from_cart_wrapper/{id}', [WrapperController::class, 'removeFromCart']);
 });
