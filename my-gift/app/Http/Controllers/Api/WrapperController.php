@@ -12,10 +12,21 @@ class WrapperController extends Controller
     public function addToCart($id) {
         $wrapper = Wrapper::findOrFail($id);
         $cart = session()->get('cart', []);
-    
-        if (isset($cart[$wrapper])) {
-            return response()->json(['message' => 'Wrapper already exists in the cart'], 400);
+
+        $hasOtherWrapper = false;
+        foreach ($cart as $item) {
+            if ($item instanceof Wrapper) {
+                $hasOtherWrapper = true;
+                break;
+            }
         }
+
+        if ($hasOtherWrapper) {
+            return response()->json(['message' => 'Only one Wrapper allowed in the cart at a time'], 400);
+        }
+        //if (isset($cart[$wrapper])) {
+        //    return response()->json(['message' => 'Wrapper already exists in the cart'], 400);
+        //}
     
         $cart[$wrapper] = $wrapper;
         session()->put('cart', $cart);
